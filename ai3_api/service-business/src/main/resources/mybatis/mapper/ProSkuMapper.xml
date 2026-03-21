@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.ProSkuMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.pro.ProSkuPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="pro_id" jdbcType="BIGINT" property="proId" />
+        <result column="price" jdbcType="DECIMAL" property="price" />
+        <result column="take_amount_min" jdbcType="DECIMAL" property="takeAmountMin" />
+        <result column="take_amount_max" jdbcType="DECIMAL" property="takeAmountMax" />
+        <result column="put_days" jdbcType="INTEGER" property="putDays" />
+        <result column="income_floor" jdbcType="DECIMAL" property="incomeFloor" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="ProSkuVOMap" type="com.ai.basecommon.core.vo.pro.ProSkuVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="price" jdbcType="DECIMAL" property="price" />
+        <result column="take_amount_min" jdbcType="DECIMAL" property="takeAmountMin" />
+        <result column="take_amount_max" jdbcType="DECIMAL" property="takeAmountMax" />
+        <result column="put_days" jdbcType="INTEGER" property="putDays" />
+        <result column="income_floor" jdbcType="DECIMAL" property="incomeFloor" />
+    </resultMap>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select * from tw_pro_sku where id = #{id} and status = 1
+    </select>
+
+    <select id="selectVOByProId" resultMap="ProSkuVOMap">
+        select id,price,take_amount_min,take_amount_max,put_days,income_floor
+        from tw_pro_sku where pro_id = #{proId} and status = 1
+    </select>
+
+
+
+</mapper>

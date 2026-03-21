@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysVipMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysVipPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="sill_integral" jdbcType="INTEGER" property="sillIntegral" />
+		<result column="rate" jdbcType="DECIMAL" property="rate" />
+		<result column="red_amount" jdbcType="DECIMAL" property="redAmount" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+
+	<select id="select" resultMap="BaseResultMap">
+		select * from tw_sys_vip order by level asc
+	</select>
+
+	<select id="findByLevel" resultMap="BaseResultMap">
+		select * from tw_sys_vip where level = #{level}
+	</select>
+
+
+
+
+</mapper>

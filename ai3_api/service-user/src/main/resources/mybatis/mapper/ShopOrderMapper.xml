@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.ShopOrderMapper">
+
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_shop_order (order_id,shop_id,user_id,num,price,amount,sum_energy,sum_amount,shop_name,shop_image,shop_content,shop_cate_id,shop_price,shop_is_virtual,addr_receiver,addr_mobile,addr_province,addr_city,addr_district,addr_detail,addr_code,status,create_time,update_time)
+        values (#{orderId},#{shopId},#{userId},#{num},#{price},#{amount},#{sumEnergy},#{sumAmount},#{shopName},#{shopImage},#{shopContent},#{shopCateId},#{shopPrice},#{shopIsVirtual},#{addrReceiver},#{addrMobile},#{addrProvince},#{addrCity},#{addrDistrict},#{addrDetail},#{addrCode},#{status},#{createTime}, #{updateTime})
+    </insert>
+
+
+
+</mapper>

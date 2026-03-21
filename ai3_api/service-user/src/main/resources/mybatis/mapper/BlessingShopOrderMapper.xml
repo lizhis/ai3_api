@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.BlessingShopOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.BlessingShopOrderPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="blessing_shop_id" jdbcType="BIGINT" property="blessingShopId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="num" jdbcType="INTEGER" property="num" />
+        <result column="price" jdbcType="INTEGER" property="price" />
+        <result column="sum" jdbcType="INTEGER" property="sum" />
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+        <result column="shop_image" jdbcType="VARCHAR" property="shopImage" />
+        <result column="shop_content" jdbcType="VARCHAR" property="shopContent" />
+        <result column="shop_cate_id" jdbcType="BIGINT" property="shopCateId" />
+        <result column="shop_price" jdbcType="INTEGER" property="shopPrice" />
+        <result column="addr_receiver" jdbcType="VARCHAR" property="addrReceiver" />
+        <result column="addr_mobile" jdbcType="VARCHAR" property="addrMobile" />
+        <result column="addr_province" jdbcType="VARCHAR" property="addrProvince" />
+        <result column="addr_city" jdbcType="VARCHAR" property="addrCity" />
+        <result column="addr_district" jdbcType="VARCHAR" property="addrDistrict" />
+        <result column="addr_detail" jdbcType="VARCHAR" property="addrDetail" />
+        <result column="addr_code" jdbcType="INTEGER" property="addrCode" />
+        <result column="delivery_code" jdbcType="VARCHAR" property="deliveryCode" />
+        <result column="delivery_name" jdbcType="VARCHAR" property="deliveryName" />
+        <result column="delivery_number" jdbcType="VARCHAR" property="deliveryNumber" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="is_del" jdbcType="INTEGER" property="isDel" />
+        <result column="delivery_time" jdbcType="BIGINT" property="deliveryTime" />
+        <result column="finish_time" jdbcType="BIGINT" property="finishTime" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <resultMap id="BlessingShopOrderVOMap" type="com.ai.basecommon.core.vo.user.BlessingShopOrderVO">
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="num" jdbcType="INTEGER" property="num" />
+        <result column="price" jdbcType="INTEGER" property="price" />
+        <result column="sum" jdbcType="INTEGER" property="sum" />
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+        <result column="shop_image" jdbcType="VARCHAR" property="shopImage" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_blessing_shop_order (order_id,blessing_shop_id,user_id,num,price,sum,shop_name,shop_image,shop_content,shop_cate_id,shop_price,addr_receiver,addr_mobile,addr_province,addr_city,addr_district,addr_detail,addr_code,status,create_time,update_time)
+        values (#{orderId},#{blessingShopId},#{userId},#{num},#{price},#{sum},#{shopName},#{shopImage},#{shopContent},#{shopCateId},#{shopPrice},#{addrReceiver},#{addrMobile},#{addrProvince},#{addrCity},#{addrDistrict},#{addrDetail},#{addrCode},#{status},#{createTime}, #{updateTime})
+    </insert>
+
+
+    <select id="findByOrderId" resultMap="BaseResultMap">
+        select *
+        from tw_blessing_shop_order
+        where is_del = 0 and order_id = #{orderId}
+    </select>
+
+
+    <select id="myOrder" resultMap="BlessingShopOrderVOMap">
+        select order_id,num,price,sum,shop_name,shop_image,status
+        from tw_blessing_shop_order
+        where is_del = 0 and user_id = #{userId}
+        order by create_time desc
+    </select>
+
+
+    <update id="confirm">
+        update tw_blessing_shop_order set finish_time = #{time},status = 3 where order_id = #{orderId}
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.AppVersionMapper">
+
+    <resultMap id="AppVersionVOMap" type="com.ai.basecommon.core.vo.base.AppVersionVO">
+        <result column="version" jdbcType="VARCHAR" property="version" />
+        <result column="update_explain" jdbcType="VARCHAR" property="updateExplain" />
+        <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+        <result column="update_type" jdbcType="INTEGER" property="updateType" />
+        <result column="release_time" jdbcType="BIGINT" property="releaseTime" />
+    </resultMap>
+
+    <select id="findLastVersion" resultMap="AppVersionVOMap">
+         select version,update_explain,download_url,update_type,release_time
+         from tw_app_version
+         where status = 1 and platform_type = #{platformType}
+         order by sort desc limit 1
+    </select>
+
+</mapper>

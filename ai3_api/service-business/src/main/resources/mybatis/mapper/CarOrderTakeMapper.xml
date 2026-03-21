@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.ProOrderTakeMapper">
+
+
+	<resultMap id="MyProOrderTakeVOMap" type="com.ai.basecommon.core.vo.pro.MyProOrderTakeVO">
+		<result column="take_amount" jdbcType="DECIMAL" property="takeAmount" />
+		<result column="take_repay" jdbcType="DECIMAL" property="takeRepay" />
+		<result column="take_earning" jdbcType="DECIMAL" property="takeEarning" />
+		<result column="back_money" jdbcType="DECIMAL" property="backMoney" />
+		<result column="today_num" jdbcType="INTEGER" property="todayNum" />
+		<result column="today_extra_num" jdbcType="INTEGER" property="todayExtraNum" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="current_days" jdbcType="INTEGER" property="currentDays" />
+		<result column="take_time" jdbcType="BIGINT" property="takeTime" />
+		<result column="finish_time" jdbcType="BIGINT" property="finishTime" />
+	</resultMap>
+
+
+
+	<select id="myTakeList" resultMap="MyProOrderTakeVOMap">
+		select take_amount,take_earning,back_money,today_num,today_extra_num,status,current_days,take_time,finish_time
+		from tw_pro_order_take
+		where order_id = #{orderId}  and status = 2 order by take_time desc
+	</select>
+
+
+
+
+
+</mapper>

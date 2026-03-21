@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.basewebsocket.mapper.UserMapper">
+
+
+	<select id="selectAllOnlineIds" resultType="Long">
+		select user_id from tw_user where is_online = 1
+	</select>
+
+	<update id="updateOnline">
+		update tw_user set is_online = 1 where user_id = #{userId}
+	</update>
+
+	<update id="updateOffline">
+		update tw_user set is_online = 0 where user_id = #{userId}
+	</update>
+
+	<update id="updateAllOffline">
+		update tw_user set is_online = 0 where is_online = 1
+	</update>
+
+
+
+
+</mapper>

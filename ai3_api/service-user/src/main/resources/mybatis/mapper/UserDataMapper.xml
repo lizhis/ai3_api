@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserDataMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserDataPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="online_days" jdbcType="INTEGER" property="onlineDays" />
+		<result column="sign_num" jdbcType="INTEGER" property="signNum" />
+		<result column="lease_num" jdbcType="INTEGER" property="leaseNum" />
+		<result column="lease_sum" jdbcType="DECIMAL" property="leaseSum" />
+		<result column="recharge_num" jdbcType="INTEGER" property="rechargeNum" />
+		<result column="recharge_sum" jdbcType="DECIMAL" property="rechargeSum" />
+		<result column="withdraw_num" jdbcType="INTEGER" property="withdrawNum" />
+		<result column="withdraw_sum" jdbcType="DECIMAL" property="withdrawSum" />
+		<result column="care_num" jdbcType="INTEGER" property="careNum" />
+		<result column="harvest_num" jdbcType="INTEGER" property="harvestNum" />
+		<result column="harvest_sum" jdbcType="INTEGER" property="harvestSum" />
+		<result column="shop_num" jdbcType="INTEGER" property="shopNum" />
+		<result column="shop_sum_energy" jdbcType="INTEGER" property="shopSumEnergy" />
+		<result column="shop_sum_amount" jdbcType="DECIMAL" property="shopSumAmount" />
+		<result column="children1_num" jdbcType="INTEGER" property="children1Num" />
+		<result column="children2_num" jdbcType="INTEGER" property="children2Num" />
+		<result column="children3_num" jdbcType="INTEGER" property="children3Num" />
+		<result column="children1_sum" jdbcType="DECIMAL" property="children1Sum" />
+		<result column="children2_sum" jdbcType="DECIMAL" property="children2Sum" />
+		<result column="children3_sum" jdbcType="DECIMAL" property="children3Sum" />
+		<result column="blessing_amount" jdbcType="DECIMAL" property="blessingAmount" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_user_data (user_id,create_time,update_time)
+		values (#{userId},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="countByUserId" resultType="int">
+		select count(*) from tw_user_data where user_id = #{userId}
+	</select>
+
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select * from tw_user_data where user_id = #{userId}
+	</select>
+
+	<select id="findSignNumByUserId" resultType="int">
+		select sign_num from tw_user_data where user_id = #{userId}
+	</select>
+
+	<delete id="deleteByUserId">
+		delete from tw_user_data where user_id = #{userId}
+	</delete>
+
+
+	<select id="findLeaseSum" resultType="java.math.BigDecimal">
+		select lease_sum from tw_user_data where user_id = #{userId}
+	</select>
+
+	<select id="findLeaseNum" resultType="int">
+		select lease_num from tw_user_data where user_id = #{userId}
+	</select>
+
+	<select id="findChildren1Sum" resultType="java.math.BigDecimal">
+		select children1_sum from tw_user_data where user_id = #{userId}
+	</select>
+
+	<select id="findBlessingAmount" resultType="java.math.BigDecimal">
+		select blessing_amount from tw_user_data where user_id = #{userId}
+	</select>
+
+	<update id="updateBlessingAmount">
+		update tw_user_data set blessing_amount = #{blessingAmount} where user_id = #{userId}
+	</update>
+
+
+
+	<update id="incChildren1Num">
+		update tw_user_data set children1_num = children1_num + 1 where user_id = #{userId}
+	</update>
+
+	<update id="incChildren2Num">
+		update tw_user_data set children2_num = children2_num + 1 where user_id = #{userId}
+	</update>
+
+	<update id="incChildren3Num">
+		update tw_user_data set children3_num = children3_num + 1 where user_id = #{userId}
+	</update>
+
+
+	<update id="incChildren1Sum">
+		update tw_user_data set children1_sum = children1_sum + #{amount} where user_id = #{userId}
+	</update>
+
+	<update id="incChildren2Sum">
+		update tw_user_data set children2_sum = children2_sum + #{amount} where user_id = #{userId}
+	</update>
+
+	<update id="incChildren3Sum">
+		update tw_user_data set children3_sum = children3_sum + #{amount} where user_id = #{userId}
+	</update>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserAlipayMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserAlipayPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="account" jdbcType="VARCHAR" property="account" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_user_alipay (user_id,real_name,account,create_time,update_time)
+		values (#{userId},#{realName},#{account},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="countByUserId" resultType="int">
+		select count(*) from tw_user_alipay where user_id = #{userId}
+	</select>
+
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select * from tw_user_alipay where user_id = #{userId}
+	</select>
+
+
+	<update id="updateRealName">
+		update tw_user_alipay set real_name = #{realName}, update_time = #{updateTime} where user_id = #{userId}
+	</update>
+
+
+
+</mapper>

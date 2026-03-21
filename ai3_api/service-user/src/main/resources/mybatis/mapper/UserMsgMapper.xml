@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserMsgMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserMsgPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="msg_id" jdbcType="BIGINT" property="msgId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="content_type" jdbcType="INTEGER" property="contentType" />
+        <result column="is_notice" jdbcType="INTEGER" property="isNotice" />
+        <result column="is_read" jdbcType="INTEGER" property="isRead" />
+        <result column="is_del" jdbcType="INTEGER" property="isDel" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+        <result column="read_time" jdbcType="BIGINT" property="readTime" />
+        <result column="delete_time" jdbcType="BIGINT" property="deleteTime" />
+        <result column="delete_reason" jdbcType="VARCHAR" property="deleteReason" />
+    </resultMap>
+
+
+    <resultMap id="UserMsgVOMap" type="com.ai.basecommon.core.vo.user.UserMsgVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="is_read" jdbcType="INTEGER" property="isRead" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    </resultMap>
+
+
+    <select id="select" resultMap="UserMsgVOMap">
+        select id,title,is_read,create_time
+        from tw_user_msg
+        where user_id = #{userId} and is_del = 0
+        order by id desc
+        <if test="page != null and page != 0">
+            limit #{begin},#{limit}
+        </if>
+    </select>
+
+
+    <select id="findById" resultMap="BaseResultMap">
+        select * from tw_user_msg where is_del = 0 and id = #{id}
+    </select>
+
+    <select id="countUnRead" resultType="int">
+        select count(1) from tw_user_msg where is_del = 0 and is_read = 0 and user_id = #{userId}
+    </select>
+
+    <select id="findMyNewMsg" resultMap="UserMsgVOMap">
+        select id,title,is_read,create_time
+        from tw_user_msg
+        where user_id = #{userId} and is_del = 0 and is_notice = 0
+        order by id desc limit 1
+    </select>
+
+
+    <update id="updateRead">
+        update tw_user_msg set is_read = 1,is_notice = 1,read_time = #{time} where id = #{id}
+    </update>
+
+
+    <update id="updateNotice">
+        update tw_user_msg set is_notice = 1 where id = #{id}
+    </update>
+
+
+</mapper>

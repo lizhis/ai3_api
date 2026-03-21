@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfRechargeAlipayMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfRechargeAlipayPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="view_title" jdbcType="VARCHAR" property="viewTitle" />
+        <result column="amount_max" jdbcType="DECIMAL" property="amountMax" />
+        <result column="num_max" jdbcType="INTEGER" property="numMax" />
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+        <result column="is_open" jdbcType="INTEGER" property="isOpen" />
+        <result column="open_channel" jdbcType="INTEGER" property="openChannel" />
+        <result column="transfer_url" jdbcType="VARCHAR" property="transferUrl" />
+        <result column="transfer_open" jdbcType="INTEGER" property="transferOpen" />
+        <result column="scan_view_title" jdbcType="VARCHAR" property="scanViewTitle" />
+        <result column="scan_amount_max" jdbcType="DECIMAL" property="scanAmountMax" />
+        <result column="scan_num_max" jdbcType="INTEGER" property="scanNumMax" />
+        <result column="scan_goods_name" jdbcType="VARCHAR" property="scanGoodsName" />
+        <result column="scan_is_open" jdbcType="INTEGER" property="scanIsOpen" />
+        <result column="scan_open_channel" jdbcType="INTEGER" property="scanOpenChannel" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_recharge_alipay limit 1
+    </select>
+
+
+
+</mapper>

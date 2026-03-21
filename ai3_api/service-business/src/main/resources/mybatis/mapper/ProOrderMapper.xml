@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.ProOrderMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.pro.ProOrderPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="order_id" jdbcType="VARCHAR" property="orderId" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="pro_id" jdbcType="BIGINT" property="proId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="image" jdbcType="VARCHAR" property="image" />
+		<result column="take_amount_min" jdbcType="DECIMAL" property="takeAmountMin" />
+		<result column="take_amount_max" jdbcType="DECIMAL" property="takeAmountMax" />
+		<result column="income_floor" jdbcType="DECIMAL" property="incomeFloor" />
+		<result column="extra_num_min" jdbcType="INTEGER" property="extraNumMin" />
+		<result column="extra_num_max" jdbcType="INTEGER" property="extraNumMax" />
+		<result column="fee_rate" jdbcType="DECIMAL" property="feeRate" />
+		<result column="put_days" jdbcType="INTEGER" property="putDays" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="cate_type" jdbcType="INTEGER" property="cateType" />
+		<result column="price" jdbcType="DECIMAL" property="price" />
+		<result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+		<result column="give_goods_type" jdbcType="INTEGER" property="giveGoodsType" />
+		<result column="give_shop" jdbcType="BIGINT" property="giveShop" />
+		<result column="give_shop_desc" jdbcType="VARCHAR" property="giveShopDesc" />
+		<result column="give_amount" jdbcType="DECIMAL" property="giveAmount" />
+		<result column="give_desc" jdbcType="VARCHAR" property="giveDesc" />
+		<result column="give_quota_amount" jdbcType="INTEGER" property="giveQuotaAmount" />
+		<result column="give_quota_is_active" jdbcType="INTEGER" property="giveQuotaIsActive" />
+		<result column="total_take_num" jdbcType="INTEGER" property="totalTakeNum" />
+		<result column="total_take_amount" jdbcType="DECIMAL" property="totalTakeAmount" />
+		<result column="total_fee" jdbcType="DECIMAL" property="totalFee" />
+		<result column="total_earning" jdbcType="DECIMAL" property="totalEarning" />
+		<result column="is_plan" jdbcType="INTEGER" property="isPlan" />
+		<result column="check_type" jdbcType="INTEGER" property="checkType" />
+		<result column="is_auto_next" jdbcType="INTEGER" property="isAutoNext" />
+		<result column="parent_order_id" jdbcType="VARCHAR" property="parentOrderId" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="ymd" jdbcType="INTEGER" property="ymd" />
+		<result column="start_time" jdbcType="BIGINT" property="startTime" />
+		<result column="end_time" jdbcType="BIGINT" property="endTime" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+		<result column="is_del" jdbcType="INTEGER" property="updateTime" />
+	</resultMap>
+
+	<resultMap id="MyProVOMap" type="com.ai.basecommon.core.vo.pro.MyProVO">
+		<result column="order_id" jdbcType="VARCHAR" property="orderId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="image" jdbcType="VARCHAR" property="image" />
+		<result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+	</resultMap>
+
+	<resultMap id="MyProDetailVOMap" type="com.ai.basecommon.core.vo.pro.MyProDetailVO">
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="image" jdbcType="VARCHAR" property="image" />
+		<result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+		<result column="total_take_amount" jdbcType="DECIMAL" property="totalTakeAmount" />
+		<result column="total_fee" jdbcType="DECIMAL" property="totalFee" />
+		<result column="total_earning" jdbcType="DECIMAL" property="totalEarning" />
+		<result column="put_days" jdbcType="INTEGER" property="putDays" />
+		<result column="cate_type" jdbcType="INTEGER" property="cateType" />
+		<result column="price" jdbcType="DECIMAL" property="price" />
+		<result column="check_type" jdbcType="INTEGER" property="checkType" />
+		<result column="is_auto_next" jdbcType="INTEGER" property="isAutoNext" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="start_time" jdbcType="BIGINT" property="startTime" />
+		<result column="end_time" jdbcType="BIGINT" property="endTime" />
+	</resultMap>
+
+
+	<insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+		insert into tw_pro_order (order_id,user_id,real_name,pro_id,title,image,take_amount_min,take_amount_max,income_floor,extra_num_min,extra_num_max,fee_rate,put_days,remark,content,cate_type,price,pay_amount,give_goods_type,give_shop,give_shop_desc,give_amount,give_desc,give_quota_amount, give_quota_is_active,check_type,is_auto_next,ymd,start_time,end_time,create_time,update_time)
+		values (#{orderId},#{userId},#{realName},#{proId},#{title},#{image},#{takeAmountMin},#{takeAmountMax},#{incomeFloor},#{extraNumMin},#{extraNumMax},#{feeRate},#{putDays},#{remark},#{content},#{cateType},#{price},#{payAmount},#{giveGoodsType},#{giveShop},#{giveShopDesc},#{giveAmount},#{giveDesc},#{giveQuotaAmount},#{giveQuotaIsActive},#{checkType},#{isAutoNext},#{ymd},#{startTime},#{endTime},#{createTime}, #{updateTime})
+	</insert>
+
+
+	<select id="findByOrderId" resultMap="BaseResultMap">
+		select * from tw_pro_order where order_id = #{orderId}
+	</select>
+
+	<select id="myList" resultMap="MyProVOMap">
+		select order_id,title,image,pay_amount,status,create_time
+		from tw_pro_order
+		where user_id = #{userId} and status = #{status}
+		order by create_time desc
+	</select>
+
+	<select id="myDetail" resultMap="MyProDetailVOMap">
+		select title,image,pay_amount,total_take_amount,total_fee,total_earning,put_days,cate_type,check_type,is_auto_next,status,create_time,start_time,end_time
+		from tw_pro_order
+		where user_id = #{userId} and order_id = #{orderId}
+	</select>
+
+	<select id="countByUserIdAndProId" resultType="int">
+		select count(*) from tw_pro_order where user_id = #{userId} and pro_id = #{proId}
+	</select>
+
+	<select id="countByYmdAndUserIdAndPileId" resultType="int">
+		select count(*) from tw_pro_order where ymd = #{ymd} and user_id = #{userId} and pro_id = #{proId}
+	</select>
+
+
+
+</mapper>

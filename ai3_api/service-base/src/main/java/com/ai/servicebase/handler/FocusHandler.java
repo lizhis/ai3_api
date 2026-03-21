@@ -1,0 +1,36 @@
+package com.ai.servicebase.handler;
+
+import com.ai.basecommon.core.param.IdParam;
+import com.ai.basecommon.core.param.PageIn;
+import com.ai.basecommon.core.vo.base.FocusVO;
+import com.ai.servicebase.config.db.ReadOnly;
+import com.ai.servicebase.mapper.FocusMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class FocusHandler {
+
+    @Autowired
+    private FocusMapper focusMapper;
+
+
+    @ReadOnly
+    public List<FocusVO> select(PageIn param) throws Exception{
+        return focusMapper.select(param);
+    }
+
+    @ReadOnly
+    public FocusVO findById(IdParam param) throws Exception{
+        if(null == param || null == param.getId()){
+            return null;
+        }
+        return focusMapper.findById(param.getId());
+    }
+
+
+
+
+}

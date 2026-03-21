@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.ClientRejectMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.ClientRejectPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from tw_client_reject
+    </select>
+
+
+
+
+
+</mapper>

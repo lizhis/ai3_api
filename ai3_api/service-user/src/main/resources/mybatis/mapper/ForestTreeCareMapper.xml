@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.ForestTreeCareMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.forest.ForestTreeCarePO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="tree_level" jdbcType="INTEGER" property="treeLevel" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="energy" jdbcType="INTEGER" property="energy" />
+		<result column="ymd" jdbcType="INTEGER" property="ymd" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+		insert into tw_forest_tree_care (user_id,tree_level,type,energy,ymd,create_time,update_time)
+		values (#{userId},#{treeLevel},#{type},#{energy},#{ymd},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="countCareNum" resultType="int">
+		select count(1) from tw_forest_tree_care where user_id = #{userId} and type = #{type} and ymd = #{ymd}
+	</select>
+
+
+
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.BlessingShopCateMapper">
+
+    <resultMap id="BlessingShopCateVOMap" type="com.ai.basecommon.core.vo.user.BlessingShopCateVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
+    <select id="select" resultMap="BlessingShopCateVOMap">
+        select id,name from tw_blessing_shop_cate where status = 1 order by sort desc
+    </select>
+
+
+
+</mapper>

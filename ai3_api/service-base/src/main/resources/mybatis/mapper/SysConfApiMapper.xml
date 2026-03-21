@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.SysConfApiMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfApiPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="auth" jdbcType="VARCHAR" property="auth" />
+        <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
+        <result column="amap_web" jdbcType="VARCHAR" property="amapWeb" />
+        <result column="ip138" jdbcType="VARCHAR" property="ip138" />
+        <result column="kuaidi100_key" jdbcType="VARCHAR" property="kuaidi100Key" />
+        <result column="kuaidi100_customer" jdbcType="VARCHAR" property="kuaidi100Customer" />
+        <result column="alipay_appid" jdbcType="VARCHAR" property="alipayAppid" />
+        <result column="alipay_pay_public_key" jdbcType="VARCHAR" property="alipayPayPublicKey" />
+        <result column="alipay_app_private_key" jdbcType="VARCHAR" property="alipayAppPrivateKey" />
+        <result column="alipay_encrypt_type" jdbcType="VARCHAR" property="alipayEncryptType" />
+        <result column="alipay_encrypt_key" jdbcType="VARCHAR" property="alipayEncryptKey" />
+        <result column="alipay_scan_appid" jdbcType="VARCHAR" property="alipayScanAppid" />
+        <result column="alipay_scan_pay_public_key" jdbcType="VARCHAR" property="alipayScanPayPublicKey" />
+        <result column="alipay_scan_app_private_key" jdbcType="VARCHAR" property="alipayScanAppPrivateKey" />
+        <result column="ai_chat_key" jdbcType="VARCHAR" property="aiChatKey" />
+        <result column="ai_chat_model" jdbcType="VARCHAR" property="aiChatModel" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <select id="find" resultMap="BaseResultMap">
+        select * from tw_sys_conf_api limit 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.CarWelfareRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.CarWelfareRecordPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="amount" jdbcType="DECIMAL" property="amount" />
+        <result column="energy" jdbcType="INTEGER" property="energy" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_car_welfare_record (user_id,amount,energy,ymd,create_time,update_time)
+        values (#{userId},#{amount},#{energy},#{ymd},#{createTime}, #{updateTime})
+    </insert>
+
+    <select id="countBy" resultType="int">
+        select count(*) from tw_car_welfare_record where user_id = #{userId} and ymd = #{ymd}
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.TaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.TaskPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="days" jdbcType="INTEGER" property="days" />
+        <result column="number" jdbcType="INTEGER" property="number" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="give_type" jdbcType="INTEGER" property="giveType" />
+        <result column="give_content" jdbcType="VARCHAR" property="giveContent" />
+        <result column="task_desc_img" jdbcType="VARCHAR" property="taskDescImg" />
+        <result column="task_desc" jdbcType="VARCHAR" property="taskDesc" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from tw_task order by days asc,number asc
+    </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select * from tw_task where id = #{id}
+    </select>
+
+    <select id="selectCurrentList" resultMap="BaseResultMap">
+        select * from tw_task where days &gt;= #{days} order by days asc,number asc limit 3
+    </select>
+
+
+
+</mapper>

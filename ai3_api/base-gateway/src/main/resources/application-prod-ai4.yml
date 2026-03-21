@@ -1,0 +1,9 @@
+
+eureka:
+  instance:
+    hostname: base-gateway
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://10.0.0.119:8761/eureka/

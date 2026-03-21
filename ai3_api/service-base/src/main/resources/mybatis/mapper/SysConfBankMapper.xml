@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.SysConfBankMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfBankPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="account" jdbcType="VARCHAR" property="account" />
+		<result column="tip" jdbcType="VARCHAR" property="tip" />
+		<result column="des" jdbcType="VARCHAR" property="des" />
+		<result column="is_back" jdbcType="INTEGER" property="isBack" />
+		<result column="is_open" jdbcType="INTEGER" property="isOpen" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+
+	<select id="find" resultMap="BaseResultMap">
+		select * from tw_sys_conf_bank where is_open = 1 limit 1
+	</select>
+
+
+
+
+</mapper>

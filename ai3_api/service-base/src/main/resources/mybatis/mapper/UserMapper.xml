@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.UserMapper">
+
+	<resultMap id="UserInfoDTOMap" type="com.ai.basecommon.core.dto.user.UserInfoDTO">
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="avatar" jdbcType="VARCHAR" property="avatar" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="pass_level" jdbcType="INTEGER" property="passLevel" />
+		<result column="password_pay" jdbcType="VARCHAR" property="passwordPay" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="idcard" jdbcType="VARCHAR" property="idcard" />
+		<result column="auth_status" jdbcType="INTEGER" property="authStatus" />
+		<result column="newbie_status" jdbcType="INTEGER" property="newbieStatus" />
+		<result column="small_quota" jdbcType="INTEGER" property="smallQuota" />
+	</resultMap>
+
+
+	<select id="userInfo" resultMap="UserInfoDTOMap">
+		select u.user_id,u.nickname,u.avatar,u.tel,u.pass_level,u.real_name,u.idcard,u.auth_status,p.password_pay,u.level,u.newbie_status,u.small_quota
+		from tw_user u
+		inner join tw_user_pass p on p.user_id = u.user_id
+		where u.user_id = #{userId} and u.is_del = 0 and u.status = 1
+	</select>
+
+	<select id="findAuthStatue" resultType="Integer">
+		select auth_status from tw_user	where user_id = #{userId}
+	</select>
+
+
+
+</mapper>

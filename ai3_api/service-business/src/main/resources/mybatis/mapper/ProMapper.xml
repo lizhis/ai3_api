@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.ProMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.pro.ProPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="detail_image" jdbcType="VARCHAR" property="detailImage" />
+        <result column="extra_num_min" jdbcType="INTEGER" property="extraNumMin" />
+        <result column="extra_num_max" jdbcType="INTEGER" property="extraNumMax" />
+        <result column="price_str" jdbcType="VARCHAR" property="priceStr" />
+        <result column="fee_rate" jdbcType="DECIMAL" property="feeRate" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="buy_max_num" jdbcType="INTEGER" property="buyMaxNum" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="cate_type" jdbcType="INTEGER" property="cateType" />
+        <result column="comp_total" jdbcType="INTEGER" property="compTotal" />
+        <result column="comp_num" jdbcType="INTEGER" property="compNum" />
+        <result column="is_open_auto_sub" jdbcType="INTEGER" property="isOpenAutoSub" />
+        <result column="auto_sub_min" jdbcType="INTEGER" property="autoSubMin" />
+        <result column="auto_sub_max" jdbcType="INTEGER" property="autoSubMax" />
+        <result column="auto_sub_stop_num" jdbcType="INTEGER" property="autoSubStopNum" />
+        <result column="is_show_home" jdbcType="INTEGER" property="isShowHome" />
+        <result column="give_goods_type" jdbcType="INTEGER" property="giveGoodsType" />
+        <result column="give_shop" jdbcType="BIGINT" property="giveShop" />
+        <result column="give_shop_desc" jdbcType="VARCHAR" property="giveShopDesc" />
+        <result column="give_amount" jdbcType="DECIMAL" property="giveAmount" />
+        <result column="give_desc" jdbcType="VARCHAR" property="giveDesc" />
+        <result column="give_quota_amount" jdbcType="INTEGER" property="giveQuotaAmount" />
+        <result column="give_quota_is_active" jdbcType="INTEGER" property="giveQuotaIsActive" />
+        <result column="check_type" jdbcType="INTEGER" property="checkType" />
+        <result column="is_auto_next" jdbcType="INTEGER" property="isAutoNext" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="is_del" jdbcType="INTEGER" property="isDel" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="is_timer_up" jdbcType="INTEGER" property="isTimerUp" />
+        <result column="timer_up_time" jdbcType="BIGINT" property="timerUpTime" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+        <result column="release_time" jdbcType="BIGINT" property="releaseTime" />
+    </resultMap>
+
+
+    <resultMap id="ProVOMap" type="com.ai.basecommon.core.vo.pro.ProVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="detail_image" jdbcType="VARCHAR" property="detailImage" />
+        <result column="extra_num_min" jdbcType="INTEGER" property="extraNumMin" />
+        <result column="extra_num_max" jdbcType="INTEGER" property="extraNumMax" />
+        <result column="fee_rate" jdbcType="DECIMAL" property="feeRate" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="cate_type" jdbcType="INTEGER" property="cateType" />
+        <result column="buy_max_num" jdbcType="INTEGER" property="buyMaxNum" />
+        <result column="comp_total" jdbcType="INTEGER" property="compTotal" />
+        <result column="comp_num" jdbcType="INTEGER" property="compNum" />
+        <result column="give_goods_type" jdbcType="INTEGER" property="giveGoodsType" />
+        <result column="give_shop" jdbcType="BIGINT" property="giveShop" />
+        <result column="give_shop_desc" jdbcType="VARCHAR" property="giveShopDesc" />
+        <result column="give_amount" jdbcType="DECIMAL" property="giveAmount" />
+        <result column="give_desc" jdbcType="VARCHAR" property="giveDesc" />
+        <result column="give_quota_amount" jdbcType="INTEGER" property="giveQuotaAmount" />
+        <result column="give_quota_is_active" jdbcType="INTEGER" property="giveQuotaIsActive" />
+        <result column="check_type" jdbcType="INTEGER" property="checkType" />
+        <result column="is_auto_next" jdbcType="INTEGER" property="isAutoNext" />
+    </resultMap>
+
+    <sql id="ProVOMapColumn">
+        id, title, image, detail_image, extra_num_min, extra_num_max, fee_rate,
+    remark, content, cate_type, buy_max_num, level, comp_total, comp_num,
+    give_goods_type, give_shop, give_shop_desc, give_amount, give_desc, give_quota_amount, give_quota_is_active, check_type, is_auto_next
+    </sql>
+
+    <select id="select" resultMap="ProVOMap">
+        select
+        <include refid="ProVOMapColumn"/>
+        from tw_pro
+        where status = 1 and is_del = 0 and level &lt;= #{level}
+        order by sort desc,id desc
+        <if test="page != null and page != 0">
+            limit #{begin},#{limit}
+        </if>
+    </select>
+
+
+    <select id="selectHome" resultMap="ProVOMap">
+        select
+        <include refid="ProVOMapColumn"/>
+        from tw_pro
+        where status = 1 and is_show_home = 1 and level &lt;= #{level}
+        order by sort desc,id desc
+    </select>
+
+
+    <select id="selectByIds" resultMap="ProVOMap">
+        select
+        <include refid="ProVOMapColumn"/>
+        from tw_pro
+        where id in
+        <foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        ORDER BY FIELD(id,
+        <foreach collection="ids" index="index" item="item" separator="," open="" close="">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        )
+    </select>
+
+
+    <select id="selectTitleByIds" resultType="String">
+        select title
+        from tw_pro
+        where id in
+        <foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </select>
+
+
+    <select id="findVOById" resultMap="ProVOMap">
+        select
+        <include refid="ProVOMapColumn"/>
+        from tw_pro where id = #{id}
+    </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select * from tw_pro where id = #{id}
+    </select>
+
+    <update id="compNumDec">
+        update tw_pro set comp_num = comp_num - #{num} where id = #{id}
+    </update>
+
+</mapper>

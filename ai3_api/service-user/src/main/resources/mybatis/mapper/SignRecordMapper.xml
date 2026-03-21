@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SignRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.SignRecordPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="years" jdbcType="INTEGER" property="years" />
+        <result column="months" jdbcType="INTEGER" property="months" />
+        <result column="days" jdbcType="INTEGER" property="days" />
+        <result column="ym" jdbcType="INTEGER" property="ym" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="sign_days" jdbcType="INTEGER" property="signDays" />
+        <result column="sign_total_days" jdbcType="INTEGER" property="signTotalDays" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+    <resultMap id="SignRecordVOMap" type="com.ai.basecommon.core.vo.user.SignRecordVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="years" jdbcType="INTEGER" property="years" />
+        <result column="months" jdbcType="INTEGER" property="months" />
+        <result column="days" jdbcType="INTEGER" property="days" />
+        <result column="ym" jdbcType="INTEGER" property="ym" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="sign_days" jdbcType="INTEGER" property="signDays" />
+        <result column="sign_total_days" jdbcType="INTEGER" property="signTotalDays" />
+    </resultMap>
+
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_sign_record (user_id,years,months,days,ym,ymd,sign_days,sign_total_days,create_time,update_time)
+        values (#{userId},#{years},#{months},#{days},#{ym},#{ymd},#{signDays},#{signTotalDays},#{createTime}, #{updateTime})
+    </insert>
+
+    <select id="countBy" resultType="int">
+        select count(*) from tw_sign_record where user_id = #{userId} and ymd = #{ymd}
+    </select>
+
+    <select id="countByUserId" resultType="int">
+        select count(*) from tw_sign_record where user_id = #{userId}
+    </select>
+
+    <select id="countByYm" resultType="int">
+        select count(*) from tw_sign_record where user_id = #{userId} and ym = #{ym}
+    </select>
+
+    <select id="findBy" resultMap="BaseResultMap">
+        select * from tw_sign_record where user_id = #{userId} and ymd = #{ymd}
+    </select>
+
+    <select id="selectByYm" resultMap="SignRecordVOMap">
+        select id,years,months,days,ym,ymd,sign_days,sign_total_days from tw_sign_record where user_id = #{userId} and ym = #{ym} order by id asc
+    </select>
+
+    <select id="selectStartList" resultMap="BaseResultMap">
+        select * from tw_sign_record where user_id = #{userId} and create_time &gt;= #{startTime} order by id asc
+    </select>
+
+    <select id="countByStartTime" resultType="int">
+        select count(1) from tw_sign_record where user_id = #{userId} and create_time &gt;= #{startTime}
+    </select>
+
+
+
+</mapper>
