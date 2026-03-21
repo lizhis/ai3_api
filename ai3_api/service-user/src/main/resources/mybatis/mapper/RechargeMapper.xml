@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.RechargeMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.RechargePO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="recharge_id" jdbcType="VARCHAR" property="rechargeId" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="pay_name" jdbcType="VARCHAR" property="payName" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="transaction_id" jdbcType="BIGINT" property="transactionId" />
+		<result column="channel_no" jdbcType="VARCHAR" property="channelNo" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="ymd" jdbcType="INTEGER" property="ymd" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+		<result column="finish_time" jdbcType="BIGINT" property="finishTime" />
+	</resultMap>
+
+	<resultMap id="RechargeVOMap" type="com.ai.basecommon.core.vo.user.RechargeVO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="recharge_id" jdbcType="VARCHAR" property="rechargeId" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+	</resultMap>
+
+
+
+	<select id="select" resultMap="RechargeVOMap">
+		select id,recharge_id,amount,type,status,create_time from tw_recharge
+		where user_id = #{userId}
+		order by id desc
+		<if test="page != null and page != 0">
+			limit #{begin},#{limit}
+		</if>
+	</select>
+
+	<select id="findAlipayNumToday" resultType="int">
+		select count(1) from tw_recharge where user_id = #{userId} and type = 2 and status = 1 and ymd = #{ymd}
+	</select>
+
+	<select id="countAlipayByChannelToday" resultType="int">
+		select count(1) from tw_recharge where channel_no = #{channelNo} and type = 2 and status = 1 and ymd = #{ymd}
+	</select>
+
+	<select id="countAlipayScanByChannelToday" resultType="int">
+		select count(1) from tw_recharge where channel_no = #{channelNo} and type = 4 and status = 1 and ymd = #{ymd}
+	</select>
+
+	<insert id="insert">
+		insert into tw_recharge (recharge_id,user_id,pay_name,amount,remark,transaction_id,type,ymd,status,create_time,update_time)
+		values (#{rechargeId},#{userId},#{payName},#{amount},#{remark},#{transactionId},#{type},#{ymd},#{status},#{createTime},#{updateTime})
+	</insert>
+
+
+
+
+</mapper>

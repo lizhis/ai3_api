@@ -1,0 +1,93 @@
+
+server:
+  port: 9527
+
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: base-gateway
+  cloud:
+    loadbalancer:
+      enabled: true
+    gateway:
+      routes:
+        - id: service-base
+          uri: lb://service-base
+          predicates:
+            - Path=/base/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Source,gateway
+
+
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Source,gateway
+
+        - id: service-business
+          uri: lb://service-business
+          predicates:
+            - Path=/business/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Source,gateway
+
+        - id: service-customer
+          uri: lb://service-customer
+          predicates:
+            - Path=/customer/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Request-Source,gateway
+
+
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/v3/api-docs/(?<svc>.*)"
+                replacement: "/${svc}/v3/api-docs"
+
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+
+
+springdoc:
+  swagger-ui:
+    use-root-path: true
+    urls:
+      - name: base
+        url: /base/v3/api-docs
+      - name: user
+        url: /user/v3/api-docs
+      - name: business
+        url: /business/v3/api-docs
+      - name: customer
+        url: /customer/v3/api-docs
+
+
+
+

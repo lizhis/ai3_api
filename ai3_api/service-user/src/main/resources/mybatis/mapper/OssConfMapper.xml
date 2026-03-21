@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.OssConfMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.OssConfPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="endpoint" jdbcType="VARCHAR" property="endpoint" />
+		<result column="access_key" jdbcType="VARCHAR" property="accessKey" />
+		<result column="access_secret" jdbcType="VARCHAR" property="accessSecret" />
+		<result column="bucket" jdbcType="VARCHAR" property="bucket" />
+		<result column="suffix" jdbcType="VARCHAR" property="suffix" />
+		<result column="size" jdbcType="INTEGER" property="size" />
+		<result column="domain" jdbcType="VARCHAR" property="domain" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<select id="find" resultMap="BaseResultMap">
+		select * from tw_oss_conf limit 1
+	</select>
+
+
+</mapper>

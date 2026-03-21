@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfZhihuiMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfZhihuiPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+        <result column="secret_key" jdbcType="VARCHAR" property="secretKey" />
+        <result column="is_open" jdbcType="INTEGER" property="isOpen" />
+        <result column="show_level" jdbcType="INTEGER" property="showLevel" />
+        <result column="open_channel" jdbcType="INTEGER" property="openChannel" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_zhihui limit 1
+    </select>
+
+
+
+
+</mapper>

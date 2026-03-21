@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.AiChatRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.AiChatRecordPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="reply" jdbcType="VARCHAR" property="reply" />
+        <result column="api_msg_id" jdbcType="VARCHAR" property="apiMsgId" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="is_del" jdbcType="INTEGER" property="isDel" />
+        <result column="reply_time" jdbcType="BIGINT" property="replyTime" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_ai_chat_record (device_id,user_id,content,ymd,create_time,update_time)
+        values (#{deviceId},#{userId},#{content},#{ymd},#{createTime}, #{updateTime})
+    </insert>
+
+    <!--
+        <insert id="insert">
+            insert into tw_ai_chat_record (device_id,user_id,content,reply,ymd,reply_time,create_time,update_time)
+            values (#{deviceId},#{userId},#{content},#{reply},#{ymd},#{replyTime},#{createTime}, #{updateTime})
+        </insert>
+    -->
+
+
+    <select id="countUserYmd" resultType="int">
+        select count(1) from tw_ai_chat_record where user_id = #{userId} and ymd = #{ymd}
+    </select>
+
+
+    <select id="countDeviceYmd" resultType="int">
+        select count(1) from tw_ai_chat_record where device_id = #{deviceId} and ymd = #{ymd}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select * from tw_ai_chat_record where is_del = 0 and user_id = #{userId} order by id asc
+    </select>
+
+    <select id="selectByDeviceId" resultMap="BaseResultMap">
+        select * from tw_ai_chat_record where is_del = 0 and device_id = #{deviceId} order by id asc
+    </select>
+
+
+    <update id="cleanByUserId">
+        update tw_ai_chat_record set is_del = 1 where user_id = #{userId} and is_del = 0
+    </update>
+
+    <update id="cleanByDeviceId">
+        update tw_ai_chat_record set is_del = 1 where device_id = #{deviceId} and is_del = 0
+    </update>
+
+    <update id="updateReply">
+        update tw_ai_chat_record set reply = #{reply},api_msg_id = #{apiMsgId},reply_time = #{replyTime},update_time = #{updateTime} where id = #{id}
+    </update>
+
+    <update id="updateNotReply">
+        update tw_ai_chat_record set status = 2,update_time = #{updateTime} where id = #{id}
+    </update>
+
+
+
+
+
+
+</mapper>

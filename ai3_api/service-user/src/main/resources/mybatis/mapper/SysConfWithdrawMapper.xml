@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfWithdrawMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfWithdrawPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="withdraw_min" jdbcType="DECIMAL" property="withdrawMin" />
+        <result column="withdraw_desc" jdbcType="VARCHAR" property="withdrawDesc" />
+        <result column="quota_is_open" jdbcType="INTEGER" property="quotaIsOpen" />
+        <result column="quota_amount" jdbcType="DECIMAL" property="quotaAmount" />
+        <result column="quota_desc" jdbcType="VARCHAR" property="quotaDesc" />
+        <result column="quota_active_sign_day" jdbcType="INTEGER" property="quotaActiveSignDay" />
+        <result column="quota_user_give_amount" jdbcType="INTEGER" property="quotaUserGiveAmount" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_withdraw limit 1
+    </select>
+
+
+
+
+</mapper>

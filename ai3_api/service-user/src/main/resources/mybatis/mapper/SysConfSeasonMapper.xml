@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfSeasonMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.SysConfSeasonPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="season_price" jdbcType="DECIMAL" property="seasonPrice" />
+        <result column="year_price" jdbcType="DECIMAL" property="yearPrice" />
+        <result column="gift1" jdbcType="BIGINT" property="gift1" />
+        <result column="gift2" jdbcType="BIGINT" property="gift2" />
+        <result column="gift3" jdbcType="BIGINT" property="gift3" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_season limit 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.GiftCodeRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.shop.GiftCodeRecordPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <insert id="insert">
+        insert into tw_gift_code_record (code,order_id,shop_name,user_id,real_name,ymd,create_time,update_time)
+        values (#{code},#{orderId},#{shopName},#{userId},#{realName},#{ymd},#{createTime}, #{updateTime})
+    </insert>
+
+    <select id="countTotalNum" resultType="int">
+        select count(1) from tw_gift_code_record where code = #{code}
+    </select>
+
+    <select id="countDayNum" resultType="int">
+        select count(1) from tw_gift_code_record where code = #{code} and ymd = #{ymd}
+    </select>
+
+    <select id="countUse" resultType="int">
+        select count(1) from tw_gift_code_record where user_id = #{userId} and code = #{code}
+    </select>
+
+
+
+</mapper>

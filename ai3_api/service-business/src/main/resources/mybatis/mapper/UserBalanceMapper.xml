@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.UserBalanceMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserBalancePO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="freeze_amount" jdbcType="DECIMAL" property="freezeAmount" />
+		<result column="integral" jdbcType="INTEGER" property="integral" />
+		<result column="energy" jdbcType="INTEGER" property="energy" />
+		<result column="gold" jdbcType="INTEGER" property="gold" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select * from tw_user_balance where user_id = #{userId};
+	</select>
+
+
+	<update id="incAmount">
+		update tw_user_balance set amount = amount + #{amount} where user_id = #{userId}
+	</update>
+
+	<update id="decAmount">
+		update tw_user_balance set amount = amount - #{amount} where user_id = #{userId}
+	</update>
+
+
+	<update id="incEnergy">
+		update tw_user_balance set energy = energy + #{num} where user_id = #{userId}
+	</update>
+
+	<update id="decEnergy">
+		update tw_user_balance set energy = energy - #{num} where user_id = #{userId}
+	</update>
+
+	<update id="incIntegral">
+		update tw_user_balance set integral = integral + #{num} where user_id = #{userId}
+	</update>
+
+	<update id="decIntegral">
+		update tw_user_balance set integral = integral - #{num} where user_id = #{userId}
+	</update>
+
+
+
+
+</mapper>

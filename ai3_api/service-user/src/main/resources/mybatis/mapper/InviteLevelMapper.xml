@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.InviteLevelMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.InviteLevelPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="child_user_id" jdbcType="BIGINT" property="childUserId" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="MyChildrenUserVOMap" type="com.ai.basecommon.core.vo.user.MyChildrenUserVO">
+        <result column="real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="time" jdbcType="BIGINT" property="time" />
+    </resultMap>
+
+    <insert id="insert">
+        insert into tw_invite_level (user_id,child_user_id,level,create_time,update_time)
+        values (#{userId},#{childUserId},#{level},#{createTime}, #{updateTime})
+    </insert>
+
+    <select id="findParent1" resultMap="BaseResultMap">
+        select * from tw_invite_level where child_user_id = #{childUserId} and level = 1
+    </select>
+
+    <select id="findParent2" resultMap="BaseResultMap">
+        select * from tw_invite_level where child_user_id = #{childUserId} and level = 2
+    </select>
+
+    <select id="findParent3" resultMap="BaseResultMap">
+        select * from tw_invite_level where child_user_id = #{childUserId} and level = 3
+    </select>
+
+
+    <select id="selectChildren1List" resultMap="MyChildrenUserVOMap">
+        select u.tel,u.real_name,l.create_time time
+        from tw_invite_level l
+        inner join tw_user u on u.user_id = l.child_user_id
+        where l.user_id = #{userId} and l.level = 1
+        order by l.id asc
+    </select>
+
+
+    <delete id="deleteByChildUserId">
+        delete from tw_invite_level where child_user_id = #{childUserId}
+    </delete>
+
+
+
+</mapper>

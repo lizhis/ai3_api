@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfSmsMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfSmsPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="tpl" jdbcType="VARCHAR" property="tpl" />
+        <result column="aliyun_sign_name" jdbcType="VARCHAR" property="aliyunSignName" />
+        <result column="aliyun_access_key" jdbcType="VARCHAR" property="aliyunAccessKey" />
+        <result column="aliyun_access_secret" jdbcType="VARCHAR" property="aliyunAccessSecret" />
+        <result column="aliyun_tpl_template_code" jdbcType="VARCHAR" property="aliyunTplTemplateCode" />
+        <result column="aliyun_tpl_param" jdbcType="VARCHAR" property="aliyunTplParam" />
+        <result column="aliyun_tpl_content" jdbcType="VARCHAR" property="aliyunTplContent" />
+        <result column="gift_tpl_template_code" jdbcType="VARCHAR" property="giftTplTemplateCode" />
+        <result column="gift_tpl_param" jdbcType="VARCHAR" property="giftTplParam" />
+        <result column="gift_tpl_content" jdbcType="VARCHAR" property="giftTplContent" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <select id="find" resultMap="BaseResultMap">
+        select * from tw_sys_conf_sms limit 1
+    </select>
+
+
+
+</mapper>

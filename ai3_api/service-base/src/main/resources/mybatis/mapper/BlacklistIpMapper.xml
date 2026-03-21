@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.BlacklistIpMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.BlacklistIpPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+    </resultMap>
+
+
+
+    <select id="existByIp" resultType="int">
+        select count(1) from tw_blacklist_ip where ip = #{ip}
+    </select>
+
+    <insert id="insert">
+        insert into tw_blacklist_ip(ip) values (#{ip})
+    </insert>
+
+
+
+</mapper>

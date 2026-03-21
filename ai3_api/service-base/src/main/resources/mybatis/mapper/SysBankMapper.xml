@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.SysBankMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysBankPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="is_detail" jdbcType="INTEGER" property="isDetail" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="SysBankVOMap" type="com.ai.basecommon.core.vo.base.SysBankVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="is_detail" jdbcType="INTEGER" property="isDetail" />
+    </resultMap>
+
+
+    <select id="select" resultMap="SysBankVOMap">
+        select id,name,is_detail from tw_sys_bank order by sort desc
+    </select>
+
+
+
+</mapper>

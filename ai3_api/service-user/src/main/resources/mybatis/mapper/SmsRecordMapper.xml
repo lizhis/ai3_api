@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SmsRecordMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.SmsRecordPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="code" jdbcType="INTEGER" property="code" />
+		<result column="yzm_type" jdbcType="INTEGER" property="yzmType" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+		<result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+		<result column="ip" jdbcType="VARCHAR" property="ip" />
+		<result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
+		<result column="send_status" jdbcType="INTEGER" property="sendStatus" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="ymd" jdbcType="INTEGER" property="ymd" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+		<result column="expire_time" jdbcType="BIGINT" property="expireTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_sms_record (tel,code,yzm_type,content,error_msg,device_id,ip,ip_addr,send_status,status,ymd,create_time,update_time,expire_time)
+		values (#{tel},#{code},#{yzmType},#{content},#{errorMsg},#{deviceId},#{ip},#{ipAddr},#{sendStatus},#{status},#{ymd},#{createTime}, #{updateTime}, #{expireTime})
+	</insert>
+
+
+	<select id="countByDeviceIdToday" resultType="int">
+		select count(1) from tw_sms_record where device_id = #{deviceId} and ymd = #{ymd}
+	</select>
+
+
+	<select id="findEndByTelAndYzmType" resultMap="BaseResultMap">
+		select * from tw_sms_record where tel = #{tel} and yzm_type = #{yzmType} and send_status = 1 and status = 1 order by id desc limit 1
+	</select>
+
+
+	<update id="updateYzmToUse">
+		update tw_sms_record set status = 2,update_time = #{time}
+		where id = #{id}
+	</update>
+
+
+
+
+</mapper>

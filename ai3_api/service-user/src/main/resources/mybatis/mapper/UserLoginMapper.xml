@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserLoginPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+		<result column="ip" jdbcType="VARCHAR" property="ip" />
+		<result column="token" jdbcType="VARCHAR" property="token" />
+		<result column="token_md5" jdbcType="VARCHAR" property="tokenMd5" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="expire_time" jdbcType="BIGINT" property="expireTime" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<insert id="insert">
+		insert into tw_user_login (user_id,device_id,ip,token,token_md5,status,expire_time,create_time,update_time)
+		values (#{userId},#{deviceId},#{ip},#{token},#{tokenMd5},#{status},#{expireTime},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="selectByOnlineUserId" resultMap="BaseResultMap">
+		select * from tw_user_login where user_id = #{userId} and is_online = 1 group by device_id
+	</select>
+
+
+	<update id="updateDisableByUserId">
+		update tw_user_login set status = 2 where user_id = #{userId}
+	</update>
+
+
+
+
+</mapper>

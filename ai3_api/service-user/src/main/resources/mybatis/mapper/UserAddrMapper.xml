@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserAddrMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserAddrPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="receiver" jdbcType="VARCHAR" property="receiver" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="province" jdbcType="VARCHAR" property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="district" jdbcType="VARCHAR" property="district" />
+		<result column="detail" jdbcType="VARCHAR" property="detail" />
+		<result column="code" jdbcType="INTEGER" property="code" />
+		<result column="is_default" jdbcType="INTEGER" property="isDefault" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<resultMap id="UserAddrVOMap" type="com.ai.basecommon.core.vo.user.UserAddrVO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="receiver" jdbcType="VARCHAR" property="receiver" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="province" jdbcType="VARCHAR" property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="district" jdbcType="VARCHAR" property="district" />
+		<result column="detail" jdbcType="VARCHAR" property="detail" />
+		<result column="code" jdbcType="INTEGER" property="code" />
+		<result column="is_default" jdbcType="INTEGER" property="isDefault" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_user_addr (user_id,receiver,mobile,province,city,district,detail,code,is_default,create_time,update_time)
+		values (#{userId},#{receiver},#{mobile},#{province},#{city},#{district},#{detail},#{code},#{isDefault},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="select" resultMap="UserAddrVOMap">
+		select id,receiver,mobile,province,city,district,detail,code,is_default from tw_user_addr where user_id = #{userId} order by is_default desc,id asc
+	</select>
+
+	<select id="findByMyAddr" resultMap="UserAddrVOMap">
+		select id,receiver,mobile,province,city,district,detail,code,is_default from tw_user_addr where id = #{id} and user_id = #{userId}
+	</select>
+
+	<select id="findById" resultMap="BaseResultMap">
+		select * from tw_user_addr where id = #{id}
+	</select>
+
+	<select id="findDefaultAddr" resultMap="UserAddrVOMap">
+		select id,receiver,mobile,province,city,district,detail,code,is_default from tw_user_addr where is_default = 1 and user_id = #{userId} limit 1
+	</select>
+
+	<select id="countForDefault" resultType="int">
+		select count(1) from tw_user_addr where is_default = 1 and user_id = #{userId}
+	</select>
+
+	<update id="isDefaultOff">
+		update tw_user_addr set is_default = 0 where user_id = #{userId}
+	</update>
+
+	<update id="update">
+		update tw_user_addr set receiver = #{receiver},mobile = #{mobile},province = #{province},city = #{city},district = #{district},detail = #{detail},code = #{code},is_default = #{isDefault},update_time = #{updateTime}
+		where id = #{id}
+	</update>
+
+
+
+
+</mapper>

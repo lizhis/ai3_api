@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserSmallQuotaMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserSmallQuotaPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="amount" jdbcType="INTEGER" property="amount" />
+        <result column="channel" jdbcType="INTEGER" property="channel" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="start_time" jdbcType="BIGINT" property="startTime" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="countByChannel" resultType="int">
+         select count(*) from tw_user_small_quota where user_id = #{userId} and channel = #{channel}
+    </select>
+
+
+    <insert id="insert">
+        insert into tw_user_small_quota (user_id,amount,channel,status,start_time,create_time,update_time)
+        values (#{userId},#{amount},#{channel},#{status},#{startTime},#{createTime}, #{updateTime})
+    </insert>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select * from tw_user_small_quota where id = #{id} and status = 1
+    </select>
+
+    <select id="findOK" resultMap="BaseResultMap">
+        select * from tw_user_small_quota where user_id = #{userId} and status = 1 limit 1
+    </select>
+
+    <select id="selectOKAndWaitList" resultMap="BaseResultMap">
+        select * from tw_user_small_quota where user_id = #{userId} and (status = 1 or status = 3) order by id asc
+    </select>
+
+
+    <select id="selectWaitList" resultMap="BaseResultMap">
+        select * from tw_user_small_quota where user_id = #{userId} and status = 3
+    </select>
+
+    <select id="countWaitList" resultType="int">
+        select count(*) from tw_user_small_quota where user_id = #{userId} and status = 3
+    </select>
+
+    <update id="updateStartTime">
+        update tw_user_small_quota set start_time = #{startTime} where id = #{id}
+    </update>
+
+    <update id="updateOK">
+        update tw_user_small_quota set status = 1, update_time = #{updateTime} where id = #{id}
+    </update>
+
+    <update id="updateUse">
+        update tw_user_small_quota set status = 2, order_id = #{orderId}, update_time = #{updateTime} where id = #{id}
+    </update>
+
+
+
+</mapper>

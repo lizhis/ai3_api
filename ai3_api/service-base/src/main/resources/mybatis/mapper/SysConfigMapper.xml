@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.SysConfigMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfigPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="customer_service_url" jdbcType="VARCHAR" property="customerServiceUrl" />
+        <result column="sign_in_amount" jdbcType="DECIMAL" property="signInAmount" />
+        <result column="recharge_min" jdbcType="DECIMAL" property="rechargeMin" />
+        <result column="recharge_level" jdbcType="INTEGER" property="rechargeLevel" />
+        <result column="pop_is_open" jdbcType="INTEGER" property="popIsOpen" />
+        <result column="pop_image" jdbcType="VARCHAR" property="popImage" />
+        <result column="pop_link_type" jdbcType="INTEGER" property="popLinkType" />
+        <result column="pop_link_target" jdbcType="VARCHAR" property="popLinkTarget" />
+        <result column="register_amount" jdbcType="DECIMAL" property="registerAmount" />
+        <result column="auth_amount" jdbcType="DECIMAL" property="authAmount" />
+        <result column="announcement" jdbcType="VARCHAR" property="announcement" />
+        <result column="invite_qr" jdbcType="VARCHAR" property="inviteQr" />
+        <result column="task_give_gold" jdbcType="VARCHAR" property="taskGiveGold" />
+        <result column="ai_chat_visitor_limit" jdbcType="INTEGER" property="aiChatVisitorLimit" />
+        <result column="ai_chat_user_limit" jdbcType="INTEGER" property="aiChatUserLimit" />
+        <result column="ai_chat_vip_limit" jdbcType="INTEGER" property="aiChatVipLimit" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_config limit 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserStepGoldMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.shop.UserStepGoldPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="energy" jdbcType="INTEGER" property="energy" />
+        <result column="time_type" jdbcType="INTEGER" property="timeType" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <insert id="insertGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into tw_user_step_gold (user_id,type,energy,time_type,ymd,create_time,update_time)
+        values (#{userId},#{type},#{energy},#{timeType},#{ymd},#{createTime}, #{updateTime})
+    </insert>
+
+
+    <select id="existClock" resultType="int">
+        select count(1) from tw_user_step_gold where user_id = #{userId} and type = 1 and create_time &gt;= #{timeA} and create_time &lt; #{timeB}
+    </select>
+
+    <select id="selectWaterList" resultMap="BaseResultMap">
+        select * from tw_user_step_gold where user_id = #{userId} and type = 2 and ymd = #{ymd} order by create_time asc
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select * from tw_user_step_gold where user_id = #{userId} and ymd = #{ymd}
+    </select>
+
+
+
+</mapper>

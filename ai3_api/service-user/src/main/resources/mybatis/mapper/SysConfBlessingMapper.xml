@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfBlessingMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfBlessingPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="is_open" jdbcType="INTEGER" property="isOpen" />
+        <result column="user_num" jdbcType="INTEGER" property="userNum" />
+        <result column="sign_start_time" jdbcType="BIGINT" property="signStartTime" />
+        <result column="ranking_total" jdbcType="VARCHAR" property="rankingTotal" />
+        <result column="ranking_week" jdbcType="VARCHAR" property="rankingWeek" />
+    </resultMap>
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_blessing limit 1
+    </select>
+
+
+
+
+</mapper>

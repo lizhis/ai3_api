@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.ForestTreeMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.forest.ForestTreePO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="water_times" jdbcType="INTEGER" property="waterTimes" />
+		<result column="water_days" jdbcType="INTEGER" property="waterDays" />
+		<result column="fertilize_times" jdbcType="INTEGER" property="fertilizeTimes" />
+		<result column="fertilize_days" jdbcType="INTEGER" property="fertilizeDays" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_forest_tree (user_id,create_time,update_time)
+		values (#{userId},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select * from tw_forest_tree where user_id = #{userId}
+	</select>
+
+
+	<update id="waterInc">
+		update tw_forest_tree set water_times = water_times + #{waterTimes},water_days = water_days + #{waterDays}  where id = #{id}
+	</update>
+
+	<update id="fertilizeInc">
+		update tw_forest_tree set fertilize_times = fertilize_times + #{fertilizeTimes},fertilize_days = fertilize_days + #{fertilizeDays}  where id = #{id}
+	</update>
+
+	<update id="updateLevel">
+		update tw_forest_tree set level = #{level}  where id = #{id}
+	</update>
+
+
+
+</mapper>

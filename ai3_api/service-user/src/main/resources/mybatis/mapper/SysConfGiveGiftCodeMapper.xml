@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.SysConfGiveGiftCodeMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfGiveGiftCodePO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="is_open_invite" jdbcType="INTEGER" property="isOpenInvite" />
+        <result column="invite_num" jdbcType="INTEGER" property="inviteNum" />
+        <result column="invite_tpl" jdbcType="VARCHAR" property="inviteTpl" />
+        <result column="is_open_sign" jdbcType="INTEGER" property="isOpenSign" />
+        <result column="sign_days" jdbcType="INTEGER" property="signDays" />
+        <result column="sign_channels" jdbcType="VARCHAR" property="signChannels" />
+        <result column="sign_start_time" jdbcType="BIGINT" property="signStartTime" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_give_gift_code limit 1
+    </select>
+
+
+
+
+</mapper>

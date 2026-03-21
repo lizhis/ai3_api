@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.NewbieChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.NewbieChannelPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="link_type" jdbcType="INTEGER" property="linkType" />
+        <result column="link_target" jdbcType="VARCHAR" property="linkTarget" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="NewbieChannelVOMap" type="com.ai.basecommon.core.vo.base.NewbieChannelVO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="link_type" jdbcType="INTEGER" property="linkType" />
+        <result column="link_target" jdbcType="VARCHAR" property="linkTarget" />
+    </resultMap>
+
+    <select id="select" resultMap="NewbieChannelVOMap">
+        select id,title,image,link_type,link_target
+        from tw_newbie_channel
+        where status = 1
+        order by sort desc,id asc
+    </select>
+
+
+
+
+</mapper>

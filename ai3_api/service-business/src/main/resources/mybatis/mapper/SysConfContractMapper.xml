@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.SysConfContractMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfContractPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="bb_name" jdbcType="VARCHAR" property="bbName" />
+        <result column="bb_image" jdbcType="VARCHAR" property="bbImage" />
+        <result column="cc_name" jdbcType="VARCHAR" property="ccName" />
+        <result column="cc_image" jdbcType="VARCHAR" property="ccImage" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_contract limit 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebase.mapper.DeviceInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.DeviceInfoPO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="platform" jdbcType="VARCHAR" property="platform" />
+        <result column="brand" jdbcType="VARCHAR" property="brand" />
+        <result column="model" jdbcType="VARCHAR" property="model" />
+        <result column="version" jdbcType="VARCHAR" property="version" />
+        <result column="browser_name" jdbcType="VARCHAR" property="browserName" />
+        <result column="computer_name" jdbcType="VARCHAR" property="computerName" />
+        <result column="host_name" jdbcType="VARCHAR" property="hostName" />
+        <result column="oaid" jdbcType="VARCHAR" property="oaid" />
+        <result column="idfa" jdbcType="VARCHAR" property="idfa" />
+        <result column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
+        <result column="lng" jdbcType="DECIMAL" property="lng" />
+        <result column="lat" jdbcType="DECIMAL" property="lat" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="district" jdbcType="VARCHAR" property="district" />
+        <result column="street" jdbcType="VARCHAR" property="street" />
+        <result column="street_number" jdbcType="VARCHAR" property="streetNumber" />
+        <result column="nation_code" jdbcType="INTEGER" property="nationCode" />
+        <result column="city_code" jdbcType="INTEGER" property="cityCode" />
+        <result column="adcode" jdbcType="INTEGER" property="adcode" />
+        <result column="ymd" jdbcType="INTEGER" property="ymd" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="findLastTimeByDeviceId" resultType="Long">
+        select create_time from tw_device_info where device_id = #{deviceId} order by id desc limit 1
+    </select>
+
+    <select id="findLastByDeviceId" resultMap="BaseResultMap">
+        select * from tw_device_info where device_id = #{deviceId} order by id desc limit 1
+    </select>
+
+
+
+
+
+</mapper>

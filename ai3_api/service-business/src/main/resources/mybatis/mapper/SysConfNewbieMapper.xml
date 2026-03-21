@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.servicebusiness.mapper.SysConfNewbieMapper">
+
+    <resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.SysConfNewbiePO">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="sign_num" jdbcType="INTEGER" property="signNum" />
+        <result column="care_num" jdbcType="INTEGER" property="careNum" />
+        <result column="open_shell" jdbcType="INTEGER" property="openShell" />
+        <result column="create_time" jdbcType="BIGINT" property="createTime" />
+        <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    </resultMap>
+
+
+    <select id="find" resultMap="BaseResultMap">
+         select * from tw_sys_conf_newbie limit 1
+    </select>
+
+
+
+</mapper>

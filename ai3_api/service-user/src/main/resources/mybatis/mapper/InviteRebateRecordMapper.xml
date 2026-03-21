@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.InviteRebateRecordMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.InviteRebateRecordPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="child_user_id" jdbcType="BIGINT" property="childUserId" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_invite_rebate_record (user_id,child_user_id,amount,type,create_time,update_time)
+		values (#{userId},#{childUserId},#{amount},#{type},#{createTime}, #{updateTime})
+	</insert>
+
+
+
+
+</mapper>

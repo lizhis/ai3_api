@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.ChangqingOrderMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.base.ChangqingOrderPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="order_id" jdbcType="VARCHAR" property="orderId" />
+		<result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+		<result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+		<result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+		<result column="product_id" jdbcType="VARCHAR" property="productId" />
+		<result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+		<result column="origin_trade_no" jdbcType="VARCHAR" property="originTradeNo" />
+		<result column="business_type" jdbcType="INTEGER" property="businessType" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="channel_remark" jdbcType="VARCHAR" property="channelRemark" />
+		<result column="pay_time" jdbcType="BIGINT" property="payTime" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into tw_changqing_order (user_id,order_id,total_amount,goods_name,mch_id,product_id,trade_no,origin_trade_no,business_type,channel_remark,create_time,update_time)
+		values (#{userId},#{orderId},#{totalAmount},#{goodsName},#{mchId},#{productId},#{tradeNo},#{originTradeNo},#{businessType},#{channelRemark},#{createTime}, #{updateTime})
+	</insert>
+
+
+
+
+</mapper>

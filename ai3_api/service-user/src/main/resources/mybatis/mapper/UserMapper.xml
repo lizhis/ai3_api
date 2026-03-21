@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserMapper">
+
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserPO">
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="avatar" jdbcType="VARCHAR" property="avatar" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="invite_user_id" jdbcType="BIGINT" property="inviteUserId" />
+		<result column="pass_level" jdbcType="INTEGER" property="passLevel" />
+		<result column="channel" jdbcType="INTEGER" property="channel" />
+		<result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+		<result column="register_addr" jdbcType="VARCHAR" property="registerAddr" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="idcard" jdbcType="VARCHAR" property="idcard" />
+		<result column="auth_status" jdbcType="INTEGER" property="authStatus" />
+		<result column="newbie_status" jdbcType="INTEGER" property="newbieStatus" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="is_del" jdbcType="INTEGER" property="isDel" />
+		<result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+		<result column="last_login_addr" jdbcType="VARCHAR" property="lastLoginAddr" />
+		<result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime" />
+		<result column="last_enter_time" jdbcType="BIGINT" property="lastEnterTime" />
+		<result column="is_online" jdbcType="INTEGER" property="isOnline" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<resultMap id="UserInfoDTOMap" type="com.ai.basecommon.core.dto.user.UserInfoDTO">
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="avatar" jdbcType="VARCHAR" property="avatar" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="pass_level" jdbcType="INTEGER" property="passLevel" />
+		<result column="password_pay" jdbcType="VARCHAR" property="passwordPay" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="idcard" jdbcType="VARCHAR" property="idcard" />
+		<result column="auth_status" jdbcType="INTEGER" property="authStatus" />
+		<result column="newbie_status" jdbcType="INTEGER" property="newbieStatus" />
+	</resultMap>
+
+	<resultMap id="UserAuthDTOMap" type="com.ai.basecommon.core.dto.user.UserAuthDTO">
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="idcard" jdbcType="VARCHAR" property="idcard" />
+		<result column="auth_status" jdbcType="INTEGER" property="authStatus" />
+	</resultMap>
+
+
+	<insert id="insertGetId" useGeneratedKeys="true" keyProperty="userId">
+		insert into tw_user (tel,nickname,avatar,invite_user_id,pass_level,register_ip,register_addr,create_time,update_time)
+		values (#{tel},#{nickname},#{avatar},#{inviteUserId},#{passLevel},#{registerIp},#{registerAddr},#{createTime}, #{updateTime})
+	</insert>
+
+	<select id="countByTel" resultType="int">
+		select count(1) from tw_user where tel = #{tel}
+	</select>
+
+	<select id="findTelByUserId" resultType="String">
+		select tel from tw_user where user_id = #{userId} and is_del = 0;
+	</select>
+
+	<select id="findByUserId" resultMap="BaseResultMap">
+		select * from tw_user where user_id = #{userId} and is_del = 0;
+	</select>
+
+	<select id="findNewbieStatusByUserId" resultType="int">
+		select newbie_status from tw_user where user_id = #{userId}
+	</select>
+
+	<select id="findLevelByUserId" resultType="int">
+		select level from tw_user where user_id = #{userId}
+	</select>
+
+	<select id="findRealNameByUserId" resultType="String">
+		select real_name from tw_user where user_id = #{userId}
+	</select>
+
+	<select id="findByTel" resultMap="BaseResultMap">
+		select * from tw_user where tel = #{tel} and is_del = 0;
+	</select>
+
+	<select id="countByIdcard" resultType="int">
+		select count(1) from tw_user where idcard = #{idcard};
+	</select>
+
+
+
+	<select id="userInfo" resultMap="UserInfoDTOMap">
+		select u.user_id,u.nickname,u.avatar,u.tel,u.pass_level,u.real_name,u.idcard,u.auth_status,p.password_pay,u.level,u.newbie_status
+		from tw_user u
+		inner join tw_user_pass p on p.user_id = u.user_id
+		where u.user_id = #{userId} and u.is_del = 0 and u.status = 1
+	</select>
+
+	<select id="findAuthInfo" resultMap="UserAuthDTOMap">
+		select user_id,real_name,idcard,auth_status
+		from tw_user
+		where user_id = #{userId}
+	</select>
+
+	<update id="updatePortrait">
+		update tw_user set avatar = #{avatar} where user_id = #{userId}
+	</update>
+
+	<update id="auth">
+		update tw_user set real_name = #{realName},idcard = #{idcard},auth_status = 1 where user_id = #{userId}
+	</update>
+
+
+	<update id="updateLevel">
+		update tw_user set level = #{level} where user_id = #{userId}
+	</update>
+
+	<update id="updateLastLoginInfo">
+		update tw_user set last_login_ip = #{ip},last_login_addr = #{addr},last_login_time = #{time},last_enter_time = #{time} where user_id = #{userId}
+	</update>
+
+	<update id="updatePassLevel">
+		update tw_user set pass_level = #{passLevel} where user_id = #{userId}
+	</update>
+
+	<update id="updateChannel">
+		update tw_user set channel = #{channel} where user_id = #{userId}
+	</update>
+
+	<update id="updateLastEnterTime">
+		update tw_user set last_enter_time = #{time} where user_id = #{userId}
+	</update>
+
+
+
+
+</mapper>

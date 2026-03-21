@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.serviceuser.mapper.UserAssetTrendsMapper">
+
+	<resultMap id="BaseResultMap" type="com.ai.basecommon.core.po.user.UserAssetTrendsPO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="symbol_type" jdbcType="INTEGER" property="symbolType" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="type_str" jdbcType="VARCHAR" property="typeStr" />
+		<result column="asset_type" jdbcType="INTEGER" property="assetType" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="running_date" jdbcType="INTEGER" property="runningDate" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<resultMap id="UserAssetTrendsVOMap" type="com.ai.basecommon.core.vo.user.UserAssetTrendsVO">
+		<result column="id" jdbcType="BIGINT" property="id" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="symbol_type" jdbcType="INTEGER" property="symbolType" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="type_str" jdbcType="VARCHAR" property="typeStr" />
+		<result column="asset_type" jdbcType="INTEGER" property="assetType" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+	</resultMap>
+
+
+	<select id="select" resultMap="UserAssetTrendsVOMap">
+		select id,amount,symbol_type,type,type_str,asset_type,remark,create_time from tw_user_asset_trends
+		where user_id = #{userId}
+		<if test="type != null and type != 0">
+			<if test="type == 1">
+				and type = 1
+			</if>
+			<if test="type == 2">
+				and type = 2
+			</if>
+			<if test="type == 4">
+				and type in (4,5,106)
+			</if>
+			<if test="type == 13">
+				and type = 13
+			</if>
+			<if test="type == 11">
+				and type in (11,12)
+			</if>
+			<if test="type == 15">
+				and type = 15
+			</if>
+			<if test="type == 6">
+				and type = 6
+			</if>
+			<if test="type == 7">
+				and type = 7
+			</if>
+			<if test="type == 31">
+				and type in (31,32,33)
+			</if>
+			<if test="type == 35">
+				and type = 35
+			</if>
+			<if test="type == 61">
+				and type = 61
+			</if>
+			<if test="type == 63">
+				and type = 63
+			</if>
+			<if test="type == 64">
+				and type = 64
+			</if>
+			<if test="type == 65">
+				and type = 65
+			</if>
+			<if test="type == 66">
+				and type = 66
+			</if>
+			<if test="type == 73">
+				and type in (73,74)
+			</if>
+			<if test="type == 996">
+				and type in (996,997)
+			</if>
+		</if>
+		<if test="time != null">
+			and create_time &gt;= #{time}
+		</if>
+		<if test="assetType != null and assetType != 0">
+			and asset_type = #{assetType}
+		</if>
+		order by id desc
+		<if test="page != null and page != 0">
+			limit #{begin},#{limit}
+		</if>
+	</select>
+
+
+
+
+
+</mapper>
