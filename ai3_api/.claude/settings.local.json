@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(D:\\\\tool\\\\maven\\\\apache-maven-3.9.14\\\\bin\\\\mvn.cmd clean:*)"
+    ]
+  }
+}
